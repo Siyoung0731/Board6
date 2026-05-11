@@ -9,10 +9,10 @@ import lombok.ToString;
 // paging.jsp : 페이지 번호를 출력할 파일
 // 한줄에 10개의 페이지번호를 출력
 // startPage		nowpage(pageNo)		endPage			
-//    1		2 3 4 5     ... 9 10  > >>
-//    11	12 13 14 15 ... 19 20 > >>
-//    21	22 23 24 25 26        > >>
-
+//          1		2 3 4 5     ... 9 10  > >>
+// << <    11	    12 13 14 15 ... 19 20 > >>
+// << <    21	22 23 24 25 26        > >>
+// 						totPageCount : 전체 페이지 수
 @Getter
 @ToString
 public class Pagination {
@@ -50,6 +50,15 @@ public class Pagination {
 		int pageSize = sto.getPageSize(); // 한줄에 출력할 페이지 번호 수
 		startPage = ((pageNo - 1) / pageSize) * pageSize + 1;
 		endPage = startPage + pageSize - 1;
+		
+		//limitStart : 데이터베이스에서 가져올 시작위치
+		limitStart = sto.getOffset();
+		// == limitStart = ( pageNo-1 ) * numOfRows;
+		
+		// 이전 페이지 이동 버튼 필요하다
+		existPrevPage = startPage > 1;
+		// 다음 페이지 이동 버튼 필요하다
+		existNextPage = endPage < totPageCount;
 	}
 }
 
