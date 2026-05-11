@@ -1,4 +1,3 @@
-### Board5
+### Board6
 
-Login, Logout 기능
-# Board6
+1. paging 

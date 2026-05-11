@@ -27,6 +27,7 @@ public class MvcConfig implements WebMvcConfigurer{
 			.addPathPatterns("/Board/**") 			
 			.excludePathPatterns("/css/**", "/img/**", "/js/**"); // 대상 제외
 		
+		// paging 에서는 기능을 중지 -- 주석
 		WebMvcConfigurer.super.addInterceptors(registry);
 	}	
 }
