@@ -34,7 +34,7 @@ public class BoardController {
 		
 		// 게시물 목록 조회 - list.jsp(menu_id=MENU01)
 		//List<BoardDto> boardList = boardMapper.getBoardList2("MENU01");
-		List<BoardDto2> bList = boardMapper.getBoardList(mto);
+		List<BoardDto> bList = boardMapper.getBoardList(mto);
 		log.info("boardList:" + bList);
 		
 		//넘어온 menu_id (=넘겨줄 menu_id)

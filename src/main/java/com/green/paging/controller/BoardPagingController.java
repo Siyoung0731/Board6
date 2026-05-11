@@ -12,12 +12,16 @@ import com.green.board.mapper.BoardMapper;
 import com.green.config.MvcConfig;
 import com.green.menus.dto.MenuDTO;
 import com.green.menus.mapper.MenuMapper;
+import com.green.paging.mapper.BoardPagingMapper;
 
 @Controller
 @RequestMapping("/BoardPaging")
 public class BoardPagingController {
 	@Autowired
 	private MenuMapper menuMapper;
+	
+	@Autowired 
+	private BoardPagingMapper boardPagingMapper;
 	
 	@Autowired
 	private BoardMapper boardMapper;
@@ -34,15 +38,18 @@ public class BoardPagingController {
 		// 메뉴 목록 : menus.jsp 용
 		List<MenuDTO> mList = menuMapper.getMenuList();
 		
+		
 		// 게시판 목록 조회(페이징해서)
-		// 해당 메뉴의 자료 갯수 :
-		//int cnt = 
+		// 해당 메뉴의 자료 갯수 : 
+		int totcount = boardPagingMapper.count(bto); // menu_id
+		System.out.println("totcount: "+totcount);
 		
-		
+		String menu_id = bto.getMenu_id();
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("boardpaging/list");
 		mv.addObject("mList", mList);
 		mv.addObject("nowpage", nowpage);
+		mv.addObject("menu_id", menu_id); // 현재 메뉴 정보
 		return mv;
 	}
 	

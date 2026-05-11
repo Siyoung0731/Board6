@@ -10,7 +10,7 @@ import com.green.menus.dto.MenuDTO;
 @Mapper
 public interface BoardMapper {
 
-	List<BoardDto> getBoardList();
+	List<BoardDto> getBoardList(MenuDTO mto);
 
 	BoardDto getBoard(BoardDto bto);
 
