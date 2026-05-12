@@ -130,10 +130,12 @@ public class BoardPagingController {
 		String menu_id = bto.getMenu_id();
 		
 		ModelAndView mv = new ModelAndView();
+		mv.setViewName("boardpaging/update");
 		mv.addObject("idx", idx);
 		mv.addObject("menu_id", menu_id);
 		mv.addObject("nowpage", nowpage);
-		mv.setViewName("boardpaging/update");
+		mv.addObject("board", board);
+		mv.addObject("mList", mList);
 		return mv;
 	}
 	@RequestMapping("/Update")

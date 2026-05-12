@@ -60,6 +60,6 @@
 	<update id="updateBoard">
 		UPDATE BOARD
 		SET TITLE = #{title}, CONTENT = #{content}
-		WHERE IDX = #{idx};
+		WHERE IDX = #{idx}
 	</update>
 </mapper>
