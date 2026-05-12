@@ -44,14 +44,14 @@
 </head>
 <body>
 	<main>
-		<%@include file="/WEB-INF/include/menus.jsp" %>
+		<%@include file="/WEB-INF/include/menuspaging.jsp" %>
 		<h2>${menu_name} 게시글 수정</h2>
-		<form action="/Board/Update?idx=${board.idx}" method="post">
+		<form action="/BoardPaging/Update?idx=${board.idx}&menu_id=${menu_id}&nowpage=${nowpage}" method="post">
 		  <table id="table1">
   		    <tr>
 		      <td><span class="red">*</span>글번호</td>
 		      <td>
-		      	<input type="text" name="idx" value="${idx}" readonly />
+		      	<input type="text" name="idx" value="${board.idx}" readonly />
 		      </td>
 		    </tr>
 		    <tr>
@@ -69,7 +69,7 @@
 		      <td colspan="2">
 		      	<input type="submit" value="수정" />
 		      	<input type="button" value="목록" 
-		      	onclick="window.location.href='/BoardPaging/View?idx=${board.idx}&menu_id=${menu_id}&nowpage=${nowpage}'"/>
+		      	onclick="window.location.href='/BoardPaging/List?idx=${idx}&menu_id=${menu_id}&nowpage=${nowpage}'"/>
 		      </td>
 		    </tr>
 		  </table>

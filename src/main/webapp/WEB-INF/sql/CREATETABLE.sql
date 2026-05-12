@@ -98,7 +98,9 @@ WHERE
     MENU_ID = 'MENU01'
 ORDER BY IDX DESC;
 
+INSERT INTO TUSER VALUES('admin', '1234', '관리자', 'admin@green.com', 1000, sysdate)
 
+INSERT INTO TUSER VALUES('sky1', '1234', '고객1', 'sky1@green.com', 1000, sysdate)
 
 
 

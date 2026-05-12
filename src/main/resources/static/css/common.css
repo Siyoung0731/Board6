@@ -8,7 +8,6 @@ main {
 	margin: 0 auto;
 }
 table, th, td {
-	width : 800px;
 	border: 1px solid black;
 	border-collapse: collapse;
 }
@@ -16,9 +15,9 @@ ul, li { list-style: none; }
 a {
 	text-decoration: none;
 	color: #333;
-	:hover {
-		text-decoration: underline;
-	}
+}
+a:hover {
+	text-decoration: underline;
 }
 h1, h2, h3 {margin: 15px 10px; }
 

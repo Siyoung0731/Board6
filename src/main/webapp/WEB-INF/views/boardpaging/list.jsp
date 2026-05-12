@@ -11,10 +11,10 @@
 <style>
 	table { width:100% }
 	td {
-		padding : 5px;
+		padding: 5px; 
 		text-align : center;
 	}
-	.list {
+	#list {
 		td:nth-of-type(1) {width: 100px;}
 		td:nth-of-type(2) {width: 300px;}
 		td:nth-of-type(3) {width: 100px;}
@@ -23,12 +23,10 @@
 	}
 
 	tr:first-of-type {
-		background-color : black;
-		color:white; 
-		
+		background-color :black;
+		color :white; 		
 		td {
 			border : 1px solid white;
-			&:nth-of-type(2) { text-align: center; }
 		}
 	}
 	tr:nth-of-type(2) td {
@@ -39,19 +37,23 @@
 	main {
 		margin-bottom: 150px;
 	}
+	#paging { margin : 15px 20px }
 	#paging > table {
 		width: 60%;
 		margin: 0 auto;
 		td { 
-			border: 1px solid red;
-			background-color: white;
+			border: 1px solid black;
+			background-color: lightgray;
 			color: black;
 			a {
 				display: block;
-				text-decoration: none;
-			    
+				text-decoration: none;		    
 			}
 		}
+	}
+	#search {
+		width: 30%;
+		margin-left: 10px 15px;
 	}
 </style>
 </head>
@@ -59,6 +61,19 @@
 	<main>
 	  <%@include file="/WEB-INF/include/menuspaging.jsp" %>
   	  <h2 class="h2">${menu.menu_name} 게시글 목록</h2>
+	  <form action="/BoardPaging/List" method="get">
+	  <input type="hidden" name="menu_id" value="${menu_id}">
+	  <input type="hidden" name="nowpage" value="${nowpage}">
+	  <div id="search">
+	    <select name="searchType">
+	      <option value="title">제목</option>
+	      <option value="content">내용</option>
+	      <option value="writer">작성자</option>
+	    </select>
+	    <input type="text" name="keyword" />
+	    <input type="submit" name="검색" />
+	  </div>
+	  </form>
 	  <table id="list">
 	  	<tr>
 		  <td>번호</td>
@@ -69,16 +84,19 @@
 	  	</tr>
 		  <tr>
  		    <td colspan="5">
- 			    [<a href="/BoardPaging/WriteForm?menu_id=${ menu_id }&nowpage=${nowpage}">새 글 등록</a>]&nbsp;&nbsp;&nbsp;
+ 			    [<a href="/BoardPaging/WriteForm?menu_id=${ menu_id }&nowpage=${nowpage}">
+ 			    새 글 등록
+ 			    </a>]
+ 			    &nbsp;&nbsp;&nbsp;
  			    [<a href="/">Home</a>]
  		    </td>
 	  	</tr>
 	  	
 	  	<c:forEach var="board" items="${ bList }">
 		  	<tr>
-	  		  <td>${ board.idx }</td>		
+	  		  <td>${ board.idx }</td>		<!-- menu.getMenu_id()  -->
 	  		  <td class="title">
-	  		  	<a href="/Board/View?idx=${board.idx}&menu_id=${menu_id}">
+	  		  	<a href="/BoardPaging/View?idx=${board.idx}&menu_id=${menu_id}&nowpage=${nowpage}">
 	  		  	  ${ board.title }
 	  		  	</a>
   		  	  </td>

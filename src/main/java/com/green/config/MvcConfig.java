@@ -24,7 +24,8 @@ public class MvcConfig implements WebMvcConfigurer{
 		// method chaining 기법 : 메서드 연속 호출 -> 가독성 높이고 코드 간결
 		registry.addInterceptor( authInterceptor )
 			//.addPathPatterns("/**")
-			.addPathPatterns("/Board/**") 			
+			.addPathPatterns("/Board/**", "/BoardPaging/**")
+			//.addPathPatterns("/Board/**", "/BoardPaging/**") 			
 			.excludePathPatterns("/css/**", "/img/**", "/js/**"); // 대상 제외
 		
 		// paging 에서는 기능을 중지 -- 주석

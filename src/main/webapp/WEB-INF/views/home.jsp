@@ -33,5 +33,7 @@
       <a href="/Users/Logout">로그아웃</a>	
     </div>   
   </main>
+  <script>
+  </script>
 </body>
 </html>
