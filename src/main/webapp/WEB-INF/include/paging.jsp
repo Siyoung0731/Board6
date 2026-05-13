@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="jakarta.tags.core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- c:set : 변수라는 '상자'를 하나 만들고 그 안에 '내용물'을 담아두는 것 -->
   <c:set var="startnum" value="${ sto.pagination.startPage }" />
   <c:set var="endnum" value="${ sto.pagination.endPage }" />

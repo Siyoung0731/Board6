@@ -14,6 +14,7 @@
 		padding: 5px; 
 		text-align : center;
 	}
+	
 	#list {
 		td:nth-of-type(1) {width: 100px;}
 		td:nth-of-type(2) {width: 300px;}
@@ -34,6 +35,7 @@
 		padding-right: 20px;
 	}
 	.title { text-align: left;}
+	
 	main {
 		margin-bottom: 150px;
 	}
@@ -60,7 +62,7 @@
 <body>
 	<main>
 	  <%@include file="/WEB-INF/include/menuspaging.jsp" %>
-  	  <h2 class="h2">${menu.menu_name} 게시글 목록</h2>
+  	  <h2 class="h2">게시글 목록</h2>
 	  <form action="/BoardPaging/List" method="get">
 	  <input type="hidden" name="menu_id" value="${menu_id}">
 	  <input type="hidden" name="nowpage" value="${nowpage}">
@@ -96,7 +98,7 @@
 		  	<tr>
 	  		  <td>${ board.idx }</td>		<!-- menu.getMenu_id()  -->
 	  		  <td class="title">
-	  		  	<a href="/BoardPaging/View?idx=${board.idx}&menu_id=${menu_id}&nowpage=${nowpage}">
+	  		  	<a href="/BoardPaging/View?idx=${board.idx}&menu_id=${board.menu_id}&nowpage=${nowpage}">
 	  		  	  ${ board.title }
 	  		  	</a>
   		  	  </td>

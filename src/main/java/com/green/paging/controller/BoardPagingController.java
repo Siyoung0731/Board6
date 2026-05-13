@@ -30,7 +30,7 @@ public class BoardPagingController {
     BoardPagingController(MvcConfig mvcConfig) {
         this.mvcConfig = mvcConfig;
     }
-	
+	// List
 	///BoardPaging/List?menu_id=MENU01&nowpage=1
 	@RequestMapping("/List")
 	public ModelAndView list(BoardDto bto, int nowpage,
@@ -80,6 +80,7 @@ public class BoardPagingController {
 		
 		return mv;
 	}
+	// View
 	// /BoardPaging/View?idx=190&menu_id=MENU01&nowpage=1
 	@RequestMapping("/View")
 	public ModelAndView view(BoardDto bto, int nowpage) {
@@ -87,6 +88,9 @@ public class BoardPagingController {
 		// 메뉴 목록 조회
 		List<MenuDTO> mList = menuMapper.getMenuList();
  		
+		// IDX 에 해당하는 게시글 조회수 증가
+		boardPagingMapper.incHit(bto);
+		
 		// idx 로 조회한 게시글 한 개를 조회
 		BoardDto board = boardPagingMapper.getBoard(bto);
 		
@@ -102,9 +106,42 @@ public class BoardPagingController {
 		mv.addObject("board", board);
 		return mv;
 	}
+	// WriteForm
+	@RequestMapping("/WriteForm")
+	public ModelAndView writeForm(BoardDto bto, int nowpage) {
+		
+		List<MenuDTO> mList = menuMapper.getMenuList();
+		
+		String menu_id = bto.getMenu_id();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("boardpaging/write");
+		mv.addObject("mList", mList);
+		mv.addObject("menu_id", menu_id);
+		mv.addObject("nowpage", nowpage);
+		return mv;
+	}
+	// Write
+	// DB 저장 : menu_id=MENU01, title=제목, writer=admin, content=내용
+	// 돌아가기 위해 필요한 변수 : menu_id, nowpage
+	@RequestMapping("/Write")
+	public ModelAndView write(BoardDto bto, int nowpage) {
+		
+		boardPagingMapper.insertBoard(bto);
+				
+		// 새 글 저장 - DB 저장
+		ModelAndView mv = new ModelAndView();
+		String menu_id = bto.getMenu_id(); // 넘어 오는 menu_id
+		
+		String fmt = "redirect:/BoardPaging/List?menu_id=%s&nowpage=%d";
+		String loc = String.format(fmt, menu_id, nowpage);
+		mv.setViewName(loc);
+		return mv;
+	}
+	// Delete
 	///BoardPaging/WriteForm?menu_id=MENU01&nowpage=1
 	@RequestMapping("/Delete")
-	public ModelAndView writeForm(BoardDto bto, int nowpage) {
+	public ModelAndView Delete(BoardDto bto, int nowpage) {
 		
 		boardPagingMapper.deleteBoard(bto);
 		
@@ -119,6 +156,7 @@ public class BoardPagingController {
 		mv.setViewName("redirect:List");
 		return mv;
 	}
+	// UpdateForm
 	@RequestMapping("/UpdateForm")
 	public ModelAndView updateForm(BoardDto bto, int nowpage) {
 		
@@ -138,6 +176,7 @@ public class BoardPagingController {
 		mv.addObject("mList", mList);
 		return mv;
 	}
+	// Update
 	@RequestMapping("/Update")
 	public ModelAndView update(BoardDto bto, int nowpage) {
 		

@@ -110,9 +110,14 @@ public class UserController {
 	}
 	// Users/IdCheckWindow
 	@GetMapping("/IdCheckWindow")
-	public ModelAndView IdCheckWindow() {
-		
+	public ModelAndView IdCheckWindow(boolean first, HttpSession session) {
+		/*
+		?first=true 활용방법
+		if( first )
+			mv.addObject("first", first);
+	    */	
 		ModelAndView mv = new ModelAndView();
+		session.setAttribute("first", "true");
 		mv.setViewName("users/idcheck");
 		return mv;
 	}	
@@ -122,13 +127,13 @@ public class UserController {
 	@ResponseBody
 	public ModelAndView IdCheck(UserDto dto, HttpSession session) {
 		
-		session.setAttribute("first", true);
+		session.setAttribute("first", "");
 		
 		UserDto user = userMapper.getUser(dto);
 		String msg = "<b class='red'>사용할 수 없는 아이디입니다.</b>";
-		if(user == null) {
+		if(user == null) 
 			msg = "<b class='red'>사용 가능한 아이디입니다.</b>";
-		}
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("users/idcheck");
 		mv.addObject("msg", msg);
@@ -143,12 +148,15 @@ public class UserController {
 	// Login
 	@RequestMapping("/Login")
 	public String login(UserDto uto, HttpServletRequest request) {
+		
 		UserDto user = userMapper.getUser(uto);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("login", user);
 		
-		return "redirect:/Board/List?menu_id=MENU01";
+		String loc = session.getAttribute("loc") + "";
+		
+		return "redirect:" + loc;
 	}
 	@RequestMapping("/Logout")
 	public String logout(UserDto uto, HttpServletRequest request) {

@@ -62,4 +62,24 @@
 		SET TITLE = #{title}, CONTENT = #{content}
 		WHERE IDX = #{idx}
 	</update>
+	<insert id="insertBoard">
+		INSERT INTO BOARD (
+		    IDX,
+		    MENU_ID,
+		    TITLE,
+		    WRITER,
+		    CONTENT
+		) VALUES ( 
+		    (SELECT NVL(MAX(IDX), 0) + 1 FROM BOARD),
+		    #{menu_id},
+		    #{title},
+		    #{writer},
+		    #{content}
+		)
+	</insert>
+	<update id="incHit">
+		UPDATE BOARD
+		SET HIT = HIT + 1
+	 	WHERE IDX = #{idx}
+	</update>
 </mapper>
