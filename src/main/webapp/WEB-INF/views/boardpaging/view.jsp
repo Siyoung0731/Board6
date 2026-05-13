@@ -7,23 +7,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>write</title>
 <link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="/css/common.css" rel="stylesheet" /> 
 <style>
-	table { witdh : 100% }
-	td {
-		padding:5px 10px;
-		text-align: center;
-		&:nth-of-type(1) {
-			background-color: black;
-			color:white;
-			border:1px solid white; 
-		}
-	}
-	
-	/* ------------------------------------------------------------------ */
+	 table { width:100%; }
+  td {
+     padding:5px 10px;
+     text-align : center;
+     &:nth-of-type(1) {
+	     background: black;
+	     color : white;
+	     border:1px solid white;
+	 } 
+  }
+ 
+  
+  /*     ------------------------------ */
+    
   input[type="text"], input[type=number], input[type=password]  {
-  	 width : 100%;
+     width : 100%;
   }
   input[type=submit], input[type=button] {
      width : 100px;
@@ -73,6 +76,7 @@
          vertical-align: baseline;
       }
   }
+  
 </style>
 <!-- <script> 위치는 항상 style보다 밑에 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -81,7 +85,7 @@
 	<main>
 		<!-- 메뉴 출력 -->
 		<%@include file="/WEB-INF/include/menuspaging.jsp" %>
-		<h2>게시글 내용 보기</h2>
+		<h2 class="h2"><b id="mname">${menu_name}</b>게시글 내용 보기</h2>
 		  <table id="table1">
 		    <tr>
 		      <td>게시글 번호</td>
@@ -119,6 +123,11 @@
 		  </table>
 	</main>
 	<!-- JavaScript 코딩 : client validation -->
+	<script>
+		const mnameEl = document.querySelector('#mname');
+		let menunameEl = document.querySelector('.menu .active');
+		mnameEl.innerHTML = menunameEl.innerHTML;
+	</script>
 </body>
 </html>
 

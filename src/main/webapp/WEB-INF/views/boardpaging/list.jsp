@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>board</title>
-<link rel="shortcut icon" href="/img/favicon2.png" type="image/x-icon">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link href="/css/common.css" rel="stylesheet" />
 <style>
 	table { width:100% }
@@ -39,30 +39,30 @@
 	main {
 		margin-bottom: 150px;
 	}
-	#paging { margin : 15px 20px }
 	#paging > table {
 		width: 60%;
 		margin: 0 auto;
 		td { 
-			border: 1px solid black;
-			background-color: lightgray;
-			color: black;
+			border: 1px solid red;
+			background-color: white;
+			color: white;
 			a {
 				display: block;
 				text-decoration: none;		    
+				}
 			}
 		}
-	}
 	#search {
 		width: 30%;
-		margin-left: 10px 15px;
+		margin: 10px auto;
 	}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
 	<main>
 	  <%@include file="/WEB-INF/include/menuspaging.jsp" %>
-  	  <h2 class="h2">게시글 목록</h2>
+  	  <h2 class="h2"><b id="mname">${menu.menu_name}</b>게시글 목록</h2>
 	  <form action="/BoardPaging/List" method="get">
 	  <input type="hidden" name="menu_id" value="${menu_id}">
 	  <input type="hidden" name="nowpage" value="${nowpage}">
@@ -110,6 +110,11 @@
 	  </table> 
       <%@include file="/WEB-INF/include/paging.jsp" %>    
 	</main>
+	<script>
+		const mnameEl = document.querySelector('#mname');
+		let menunameEl = document.querySelector('.menu .active');
+		mnameEl.innerHTML = menunameEl.innerHTML;
+	</script>
 </body>
 </html>
 

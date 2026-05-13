@@ -16,14 +16,12 @@ a {
 	text-decoration: none;
 	color: #333;
 }
-a:hover {
-	text-decoration: underline;
-}
+a:hover { text-decoration: underline; }
 h1, h2, h3 {margin: 15px 10px; }
 
 .red { color: red; }
 
-.menu {
+.menu, #paging {
 	td {
 		padding: 0px;	
 		a { 

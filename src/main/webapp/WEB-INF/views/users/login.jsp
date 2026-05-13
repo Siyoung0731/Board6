@@ -10,8 +10,9 @@
 <link href="/css/common.css" rel="stylesheet" /> 
 </head>
 <body>
-<form action="/Users/Login" method="post">
+ <main>
   <h2>로그인</h2>
+  <form action="/Users/Login" method="post">
   <div class="mb-3">
     <label for="userid" class="form-label">아이디</label>
     <input type="text" class="form-control" name="userid" id="userid" value="admin">
@@ -22,6 +23,7 @@
   </div>
   <button type="submit" class="btn btn-primary">로그인</button>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-</form>
+ </form>
+ </main>
 </body>
 </html>

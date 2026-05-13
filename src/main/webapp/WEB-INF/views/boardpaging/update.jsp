@@ -84,7 +84,7 @@
 		<form action="/BoardPaging/Update?idx=${board.idx}&menu_id=${menu_id}&nowpage=${nowpage}" method="post">
 		  <table id="table1">
   		    <tr>
-		      <td><span class="red">*</span>글번호</td>
+		      <td><span class="red">*</span>게시글 번호</td>
 		      <td>
 		      	<input type="text" name="idx" value="${board.idx}" readonly />
 		      </td>

@@ -45,7 +45,7 @@ table { width:100%;  }
 <body>
 	<main>
 		<%@include file="/WEB-INF/include/menuspaging.jsp" %>
-		<h2>게시글 작성</h2>
+		<h2 class="h2"><b id="mname">${menu_name}</b>새 글 쓰기</h2>
 		<form action="/BoardPaging/Write" method="post">
 		 <input type="hidden" name="menu_id" value="${ menu_id }">
 		 <!-- 입력을 받지 않고 nowpage 값을 넘겨주기 위함. -->
@@ -77,7 +77,9 @@ table { width:100%;  }
 	</main>
 	<!-- JavaScript 코딩 : client validation -->
 	<script>
-		
+		const mnameEl = document.querySelector('#mname');
+		let menunameEl = document.querySelector('.menu .active');
+		mnameEl.innerHTML = menunameEl.innerHTML;
 	</script>
 </body>
 </html>

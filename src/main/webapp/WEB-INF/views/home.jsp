@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,16 +25,37 @@
     
     <div><a href="/BoardPaging/List?menu_id=MENU01&nowpage=1">게시글 목록(페이징)</a></div>
     <div><a href="/BoardPaging/WriteForm?menu_id=MENU01&nowpage=1">게시글 추가(페이징)</a></div>
-    <div>&nbsp;</div>
-    
+    <div>&nbsp;</div> 
     <div>
-      [ ${sessionScope.login.username} ] 님 환영합니다.<br>
-      당신의 가입일은 [ ${sessionScope.login.regdate} ] 입니다.<br>   
-      <a href="/Users/LoginForm">로그인</a><br>	
-      <a href="/Users/Logout">로그아웃</a>	
+	  <c:choose>
+	    <%-- 1. 로그인 전 (출입증이 없을 때) --%>
+	    <c:when test="${sessionScope.login eq null}">
+	        <a href="/Users/LoginForm">로그인</a><br>
+	    </c:when>
+	
+	    <%-- 2. 로그인 후 (출입증이 있을 때) --%>
+	    <c:otherwise>
+	        <span>[ ${sessionScope.login.username} ]님 환영합니다!</span><br>
+	        당신의 가입일은 [ ${sessionScope.login.regdate} ] 입니다.<br>  
+	        <a href="/Users/Logout">로그아웃</a>
+	    </c:otherwise>
+	  </c:choose>
     </div>   
+    <input type="text" id="num" value="1" />
+    <div><a id="btnNate" href="https://www.nate.com">Click</a></div>
   </main>
   <script>
+  	const btnNateEl = document.querySelector('#btnNate')
+  	const numEl = document.querySelector('#num')
+  	btnNateEl.onclick = function(e) {
+  		if(numEl.value == '2') {
+	  		e.preventDefault(); // 기본이벤트 취소
+	  		e.stopPropagation();  			
+	  		if(numEl.value == "2") 
+	  			location.href= this.href;
+  		}
+  		//msgEl.innerHTML = '<h2>하하하</h2>';
+  	}
   </script>
 </body>
 </html>

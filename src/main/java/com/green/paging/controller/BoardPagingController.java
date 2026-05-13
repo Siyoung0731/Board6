@@ -15,6 +15,9 @@ import com.green.paging.dto.Pagination;
 import com.green.paging.dto.SearchDto;
 import com.green.paging.mapper.BoardPagingMapper;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/BoardPaging")
 public class BoardPagingController {
@@ -130,11 +133,11 @@ public class BoardPagingController {
 		boardPagingMapper.insertBoard(bto);
 				
 		// 새 글 저장 - DB 저장
-		ModelAndView mv = new ModelAndView();
 		String menu_id = bto.getMenu_id(); // 넘어 오는 menu_id
+		ModelAndView mv = new ModelAndView();
 		
 		String fmt = "redirect:/BoardPaging/List?menu_id=%s&nowpage=%d";
-		String loc = String.format(fmt, menu_id, nowpage);
+		String loc = String.format(fmt, menu_id, 1);	
 		mv.setViewName(loc);
 		return mv;
 	}
@@ -162,15 +165,14 @@ public class BoardPagingController {
 		
 		List<MenuDTO> mList = menuMapper.getMenuList();
 		
+		// 수정할 페이지에 출력할 자료를 IDX로 조회
 		BoardDto board = boardPagingMapper.getBoard(bto);
-		
-		int idx = bto.getIdx();
-		String menu_id = bto.getMenu_id();
-		
+					
+		// 수정할 페이지 이동
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("boardpaging/update");
-		mv.addObject("idx", idx);
-		mv.addObject("menu_id", menu_id);
+		mv.addObject("idx", bto.getIdx());
+		mv.addObject("menu_id", bto.getMenu_id());
 		mv.addObject("nowpage", nowpage);
 		mv.addObject("board", board);
 		mv.addObject("mList", mList);
@@ -182,14 +184,13 @@ public class BoardPagingController {
 		
 		boardPagingMapper.updateBoard(bto);
 		
-		int idx = bto.getIdx();
 		String menu_id = bto.getMenu_id();
+		String loc = """
+				redirect:/BoardPaging/List?menu_id=%s&nowpage=%d
+				""".formatted(menu_id, nowpage);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("idx", idx);
-		mv.addObject("menu_id", menu_id);
-		mv.addObject("nowpage", nowpage);
-		mv.setViewName("redirect:/BoardPaging/View");
+		mv.setViewName(loc);
 		return mv;
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 import com.green.config.MvcConfig;
 import com.green.user.dto.UserDto;
@@ -20,14 +21,8 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/Users")
 public class UserController {
-
-    private final MvcConfig mvcConfig;
 	@Autowired
 	private UserMapper userMapper;
-
-    UserController(MvcConfig mvcConfig) {
-        this.mvcConfig = mvcConfig;
-    }
 
 	@RequestMapping("/List")
 	public ModelAndView list() {
@@ -54,7 +49,7 @@ public class UserController {
 		userMapper.insertUser(dto);	
 		// 넘어온 데이터로 DB 에 저장		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:List");		
+		mv.setViewName("redirect:/Users/List");		
 		return mv;
 	}
 	// Delete
@@ -149,14 +144,22 @@ public class UserController {
 	@RequestMapping("/Login")
 	public String login(UserDto uto, HttpServletRequest request) {
 		
-		UserDto user = userMapper.getUser(uto);
-		
+		UserDto user = userMapper.getLogin(uto);
+		// 세션 객체 가져오기(없으면 새로 생성)
 		HttpSession session = request.getSession();
-		session.setAttribute("login", user);
+		// 세션에 데이터 저장(서버 메모리에 보관) login 변수에 user 저장
+		session.setAttribute("login", user);	
 		
-		String loc = session.getAttribute("loc") + "";
+		String loc = "";
+		// https://localhost:8080  즉 "/" 주소가 이전주소일 땐  
+		// session.getAttribute("loc") -> null 이다. Users/Null
+		if(session.getAttribute("loc") == null) 
+			loc = "redirect:/";
+		else
+			loc = "redirect:" + session.getAttribute("loc").toString();
+		System.out.println("loc:" + loc);
 		
-		return "redirect:" + loc;
+		return loc;
 	}
 	@RequestMapping("/Logout")
 	public String logout(UserDto uto, HttpServletRequest request) {

@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.green.menus.dto.MenuDTO;
 import com.green.user.dto.UserDto;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Mapper
 public interface UserMapper {	
 	
@@ -24,4 +26,6 @@ public interface UserMapper {
 	UserDto getIdDupCheck2(UserDto dto);
 
 	void updateUser2(Map<String, Object> map);
+
+	UserDto getLogin(UserDto uto);
 }

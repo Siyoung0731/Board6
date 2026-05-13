@@ -28,6 +28,18 @@
 		FROM TUSER
 		WHERE USERID = #{ userid }	
 	</select>
+	<!-- 로그인 -->
+	<select id="getLogin">
+		SELECT 
+			USERID,
+			PWD,
+			USERNAME,
+			EMAIL,
+			UPOINT,
+			TO_CHAR(REGDATE, 'YYYY-MM-DD HH24:MI:SS') REGDATE
+		FROM TUSER
+		WHERE USERID = #{ userid } AND PWD = #{ pwd }	
+	</select>
 	<!-- user insert -->
 	<insert id="insertUser">
 		INSERT INTO TUSER(
